@@ -9,11 +9,6 @@ h_num = 1;
 h_denum = 1;
 
 
-zeta_c =0.75;
-omega_c = 5;
-zeta_o = zeta_c;
-omega_o = 10 * omega_c;
-
 options = bodeoptions;
 options.FreqUnits = 'Hz'; % or 'rad/second', 'rpm', etc.
 
