@@ -17,27 +17,23 @@ Hcutoff = tf([1],[1/cutoff 1]);
 ratio = 20;
 Hlead = tf([1 1],[1/(1*ratio) 1]);
 
-Hcontroller = Hcutoff*Hlead*30;
+Hcontroller = Hcutoff*Hlead;
 
-% legend('no gain', 'gain');
+HSys = Hcontroller*P;
+limits = [0, 500000]
+crossover = 0.1 * 2 * pi;
+Wcp = 50000;
+while abs(crossover - Wcp) > 0.1
+    gain = mean(limits);
+    [~,~,~,Wcp] = margin(HSys*gain);
+    if Wcp > crossover
+        limits(2) = gain;
+    else
+        limits(1) = gain;
+    end
+end
 
-% limits = [0, 50000]
-% crossover = 10 * 2 * pi;
-% Wcp = 0;
-% while abs(crossover - Wcp) > 0.1
-%     gain = mean(limits);
-%     [~,~,~,Wcp] = margin(Hcontroller*gain);
-%     if Wcp > crossover
-%         limits(2) = gain;
-%     else
-%         limits(1) = gain;
-%     end
-% end
-% 
-% Wcp = Wcp / (2*pi)
-% bode(Hcontroller*gain, options);
-% Hcontroller = Hcontroller*gain;
-
+Hcontroller = Hcontroller*gain;
 h_num = cell2mat(Hcontroller.num);
 h_denum = cell2mat(Hcontroller.den);
 

@@ -51,14 +51,14 @@ t = 0:step:10;
 t = t';
 
 
-% coureur = generateRunnerPositions(step);
-% coureur = coureur';
+coureur = generateRunnerPositionsSimple(step);
+coureur = coureur';
 
-x_usain = [0 1.89 2.88 3.78 4.64 5.47 6.29 7.1 7.92 8.75 9.58];
-y_usain = [0 10 20 30 40 50 60 70 80 90 100];
-f = polyfit(x_usain,y_usain ,3);
-coureur =polyval(f, t);
-coureur = coureur(1:1000);
+% x_usain = [0 1.89 2.88 3.78 4.64 5.47 6.29 7.1 7.92 8.75 9.58];
+% y_usain = [0 10 20 30 40 50 60 70 80 90 100];
+% f = polyfit(x_usain,y_usain ,3);
+% coureur =polyval(f, t);
+% coureur = coureur(1:1000);
 
 ref.time = [];
 ref.signals.values = [coureur];

@@ -4,7 +4,7 @@ clear all;
 define_consts()
 
 % Gain of controller : 
-h_num = 1;
+h_num = 100;
 h_denum = 1;
 
 opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
