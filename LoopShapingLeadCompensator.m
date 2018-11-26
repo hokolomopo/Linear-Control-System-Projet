@@ -58,7 +58,7 @@ figure(bodePlot);
 legend(sprintf('Ratio = %.2f', Ratio(1)),sprintf('Ratio = %.2f', Ratio(2)),sprintf('Ratio = %.2f', Ratio(3)), sprintf('Ratio = %.2f', Ratio(4)), sprintf('Ratio = %.2f', Ratio(5)),'Location', 'southeast');
 
 figure(nsqPlot);
-legend(sprintf('Gain = %.2f', Ratio(1)),sprintf('Gain = %.2f', Ratio(2)),sprintf('Gain = %.2f', Ratio(3)), sprintf('Gain = %.2f', Ratio(4)), sprintf('Gain = %.2f', Ratio(5)),'Location', 'southeast');
+legend(sprintf('Ratio = %.2f', Ratio(1)),sprintf('Ratio = %.2f', Ratio(2)),sprintf('Ratio = %.2f', Ratio(3)), sprintf('Ratio = %.2f', Ratio(4)), sprintf('Ratio = %.2f', Ratio(5)),'Location', 'southeast');
 
 print(acceleration, 'graphs/accLSLead', '-depsc2');
 print(difference, 'graphs/diffLSLead', '-depsc2');

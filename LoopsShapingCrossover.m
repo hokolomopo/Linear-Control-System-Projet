@@ -1,7 +1,7 @@
 close all;
 clear all;
 
-define_consts()
+define_consts();
 
 s = ss(A,B,C,D);
 P = tf(s);
