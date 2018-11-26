@@ -6,7 +6,7 @@ define_consts()
 % Gain of controller : 
 h_num = 1;
 h_denum = [1, 0];
-kis = [0, 0.5,  1, 2, 3];
+kis = [0, 1, 2];
 kp = 1;
 
 options = bodeoptions;
@@ -19,7 +19,7 @@ nsqPlot = figure('Name','Nyquist');
 
 for i=1:size(kis,2)
     ki = kis(i);
-    h_num = [kp ki];
+    h_num = [kp ki]*defaultGain;
 
     opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
     sim('loopShaping', [0,10],opt);
@@ -43,19 +43,19 @@ end
 figure(acceleration);
 xlabel('Time (s)')
 ylabel('Acceleration (m/s^2');
-legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)), sprintf('ki = %.2f', kis(4)), sprintf('ki = %.2f', kis(5)),'Location', 'southeast');
+legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)),'Location', 'southeast');
 
 
 figure(difference);
 xlabel('Time (s)')
 ylabel('Difference (m)');
-legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)), sprintf('ki = %.2f', kis(4)), sprintf('ki = %.2f', kis(5)),'Location', 'southeast');
+legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)),'Location', 'southeast');
 
 figure(bodePlot);
-legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)), sprintf('ki = %.2f', kis(4)), sprintf('ki = %.2f', kis(5)),'Location', 'southeast');
+legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)),'Location', 'southeast');
 
 figure(nsqPlot);
-legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)), sprintf('ki = %.2f', kis(4)), sprintf('ki = %.2f', kis(5)),'Location', 'southeast');
+legend(sprintf('ki = %.2f', kis(1)),sprintf('ki = %.2f', kis(2)),sprintf('ki = %.2f', kis(3)),'Location', 'southeast');
 
 print(acceleration, 'graphs/accLSPI', '-depsc2');
 print(difference, 'graphs/diffLSPI', '-depsc2');

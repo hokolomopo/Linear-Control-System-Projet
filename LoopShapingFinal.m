@@ -14,7 +14,7 @@ cutoff = 100;
 Hcutoff = tf([1],[1/cutoff 1]);
 
 % Lead-Lag compensator
-ratio = 20;
+ratio = 5;
 Hlead = tf([1 1],[1/(1*ratio) 1]);
 
 Hcontroller = Hcutoff*Hlead*30;

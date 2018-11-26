@@ -4,9 +4,9 @@ clear all;
 define_consts()
 
 % Gain of controller : 
-h_num = 1;
+h_num = defaultGain;
 h_denum = 1;
-cutoffs = [1, 10, 100, 500, 1000];
+cutoffs = [1, 10, 100];
 
 options = bodeoptions;
 options.FreqUnits = 'Hz'; % or 'rad/second', 'rpm', etc.
@@ -42,19 +42,19 @@ end
 figure(acceleration);
 xlabel('Time (s)')
 ylabel('Acceleration (m/s^2');
-legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)), sprintf('cutoff = %.2f', cutoffs(4)), sprintf('cutoff = %.2f', cutoffs(5)),'Location', 'southeast');
+legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)),'Location', 'southeast');
 
 
 figure(difference);
 xlabel('Time (s)')
 ylabel('Difference (m)');
-legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)), sprintf('cutoff = %.2f', cutoffs(4)), sprintf('cutoff = %.2f', cutoffs(5)),'Location', 'southeast');
+legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)),'Location', 'southeast');
 
 figure(bodePlot);
-legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)), sprintf('cutoff = %.2f', cutoffs(4)), sprintf('cutoff = %.2f', cutoffs(5)),'Location', 'southeast');
+legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)),'Location', 'southeast');
 
 figure(nsqPlot);
-legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)), sprintf('cutoff = %.2f', cutoffs(4)), sprintf('cutoff = %.2f', cutoffs(5)),'Location', 'southeast');
+legend(sprintf('cutoff = %.2f', cutoffs(1)),sprintf('cutoff = %.2f', cutoffs(2)),sprintf('cutoff = %.2f', cutoffs(3)),'Location', 'southeast');
 
 print(acceleration, 'graphs/accLSFilter', '-depsc2');
 print(difference, 'graphs/diffLSFilter', '-depsc2');

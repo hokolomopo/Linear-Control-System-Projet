@@ -4,7 +4,7 @@ clear all;
 define_consts()
 
 % Gain of controller : 
-C_Gains = [1, 4,10,15,20];
+C_Gains = [1, 4,10];
 h_num = 1;
 h_denum = 1;
 
@@ -43,19 +43,19 @@ end
 figure(acceleration);
 xlabel('Time (s)')
 ylabel('Acceleration (m/s^2');
-legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)), sprintf('Gain = %.2f', C_Gains(4)), sprintf('Gain = %.2f', C_Gains(5)),'Location', 'southeast');
+legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)),'Location', 'southeast');
 
 
 figure(difference);
 xlabel('Time (s)')
 ylabel('Difference (m)');
-legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)), sprintf('Gain = %.2f', C_Gains(4)), sprintf('Gain = %.2f', C_Gains(5)),'Location', 'southeast');
+legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)),'Location', 'southeast');
 
 figure(bodePlot);
-legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)), sprintf('Gain = %.2f', C_Gains(4)), sprintf('Gain = %.2f', C_Gains(5)),'Location', 'southeast');
+legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)),'Location', 'southeast');
 
 figure(nsqPlot);
-legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)), sprintf('Gain = %.2f', C_Gains(4)), sprintf('Gain = %.2f', C_Gains(5)),'Location', 'southeast');
+legend(sprintf('Gain = %.2f', C_Gains(1)),sprintf('Gain = %.2f', C_Gains(2)),sprintf('Gain = %.2f', C_Gains(3)),'Location', 'southeast');
 
 print(acceleration, 'graphs/accLSGain', '-depsc2');
 print(difference, 'graphs/diffLSGain', '-depsc2');
