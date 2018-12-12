@@ -4,9 +4,9 @@ clear all;
 define_consts()
 
 % Gain of controller : 
-h_num = defaultGain;
+h_num = 10;
 h_denum = 1;
-cutoffs = [1, 10, 100];
+cutoffs = [5, 10, 100,];
 
 options = bodeoptions;
 options.FreqUnits = 'Hz'; % or 'rad/second', 'rpm', etc.
@@ -60,3 +60,15 @@ print(acceleration, 'graphs/accLSFilter', '-depsc2');
 print(difference, 'graphs/diffLSFilter', '-depsc2');
 print(bodePlot, 'graphs/bodeLSFilter', '-depsc2');
 print(nsqPlot, 'graphs/nyquistLSFilter', '-depsc2');
+
+figure(acceleration);
+title('Accelaration of camera');
+figure(difference);
+title('Difference of positions');
+
+print(acceleration, 'graphs/accLSFilter','-dpng', '-r500');
+print(difference, 'graphs/diffLSFilter','-dpng', '-r500');
+print(bodePlot, 'graphs/bodeLSFilter','-dpng', '-r500');
+print(nsqPlot, 'graphs/nyquistLSFilter','-dpng', '-r500');
+
+

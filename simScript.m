@@ -3,8 +3,8 @@ clear all;
 
 define_consts()
 
-zeta_c =0.75;
-omega_c = 5;
+zeta_c =0.65;
+omega_c = 4;
 zeta_o = zeta_c;
 omega_o = 10 * omega_c;
 
@@ -44,23 +44,38 @@ plot(x_camera); hold on;
 plot(x_runner);hold on;
 
 figure(difference);
-plot(diff);hold on;
+plot(diff.Time, diff.data);hold on;
 
 
 figure(acceleration);
 xlabel('Time(s)');
 ylabel('Acceleration (m/s^2)');
-title('Accelaration of camera');
+% title('Accelaration of camera');
 
 figure(positions);
 xlabel('Time(s)');
 ylabel('Position (m)');
-title('Positions');
+% title('Positions');
 legend('Position of runner', 'Position of camera', 'Location', 'southeast');
-print(positions, 'positionsRunnerAndCameraStateFeedback', '-depsc2');
 
 figure(difference);
 xlabel('Time(s)');
 ylabel('Difference (m)');
+% title('Difference of positions');
+
+print(positions, 'graphs/positionsRunnerAndCameraStateFeedback', '-depsc2');
+print(acceleration, 'graphs/accelerationRunnerAndCameraStateFeedback', '-depsc2');
+print(difference, 'graphs/differencenRunnerAndCameraStateFeedback', '-depsc2');
+
+figure(acceleration);
+title('Accelaration of camera');
+
+figure(difference);
 title('Difference of positions');
 
+figure(positions);
+title('Positon for camera and runner');
+
+print(positions, 'graphs/stateFeedbackpositions', '-dpng', '-r500');
+print(acceleration, 'graphs/stateFeedbackacceleration', '-dpng', '-r500');
+print(difference, 'graphs/stateFeedbackdifferencen', '-dpng', '-r500');

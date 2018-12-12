@@ -1,10 +1,10 @@
 clear all
 close all
 
-c = 0.05;
-m = 10;
+c = 0.;
+m = 7;
 
-defaultGain = 30;
+defaultGain = 20;
 
 A = [0 1; 0 -c/m];
 B = [0;1/m];

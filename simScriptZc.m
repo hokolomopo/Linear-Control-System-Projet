@@ -3,8 +3,8 @@ clear all;
 
 define_consts()
 
-zc = [0.9, 0.75,0.5,0.3];
-omega_c = 5;
+zc = [0.9, 0.75, 0.5];
+omega_c = 3;
 omega_o = 10 * omega_c;
 
 opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
@@ -46,26 +46,33 @@ end
 
 
 figure(acceleration);
-% xlabel(sprintf('Time(s) , \\omega_c = %.2f \\zeta_o = \\zeta_c, \\omega_o = 2*\\omega_c', omega_c));
 xlabel('Time (s)')
 ylabel('Acceleration (m/s^2)');
-% title('Accelaration of camera');
-legend(sprintf('\\zeta_c = %.2f', zc(1)), sprintf('\\zeta_c = %.2f', zc(2)), sprintf('\\zeta_c = %.2f', zc(3)) ,sprintf('\\zeta_c = %.2f', zc(4)),'Location', 'southeast');
+legend(sprintf('\\zeta_c = %.2f', zc(1)), sprintf('\\zeta_c = %.2f', zc(2)), sprintf('\\zeta_c = %.2f', zc(3)),'Location', 'northeast');
 
 figure(difference);
-% xlabel(sprintf('Time(s) , \\omega_c = %.2f \\zeta_o = \\zeta_c, \\omega_o = 2*\\omega_c', omega_c));
 xlabel('Time (s)')
 ylabel('Difference (m)');
-% title('Difference of positions');
-legend(sprintf('\\zeta_c = %.2f', zc(1)), sprintf('\\zeta_c = %.2f', zc(2)), sprintf('\\zeta_c = %.2f', zc(3)) ,sprintf('\\zeta_c = %.2f', zc(4)) ,'Location', 'northwest');
+legend(sprintf('\\zeta_c = %.2f', zc(1)), sprintf('\\zeta_c = %.2f', zc(2)), sprintf('\\zeta_c = %.2f', zc(3)),'Location', 'southeast');
 
 figure(stabilisation);
-% xlabel(sprintf('Time(s) , \\omega_c = %.2f \\zeta_o = \\zeta_c, \\omega_o = 2*\\omega_c', omega_c));
 xlabel('Time (s)')
 ylabel('Position (m)');
-% title('Stability?');
-legend(sprintf('\\zeta_c = %.2f', zc(1)), sprintf('\\zeta_c = %.2f', zc(2)), sprintf('\\zeta_c = %.2f', zc(3)) ,sprintf('\\zeta_c = %.2f', zc(4)),'Location', 'southeast');
+legend(sprintf('\\zeta_c = %.2f', zc(1)), sprintf('\\zeta_c = %.2f', zc(2)), sprintf('\\zeta_c = %.2f', zc(3)),'Location', 'northeast');
 
-print(acceleration, 'accelerationDifferentsZc', '-depsc2');
-print(difference, 'differenceDifferentsZc', '-depsc2');
-print(stabilisation, 'stabilisationDifferentsZc', '-depsc2');
+print(acceleration, 'graphs/accelerationDifferentsZc', '-depsc2');
+print(difference, 'graphs/differenceDifferentsZc', '-depsc2');
+print(stabilisation, 'graphs/stabilisationDifferentsZc', '-depsc2');
+
+figure(acceleration);
+title('Accelaration of camera');
+
+figure(difference);
+title('Difference of positions');
+
+figure(stabilisation);
+title('Stability');
+
+print(acceleration, 'graphs/accelerationDifferentsZc', '-dpng', '-r500');
+print(difference, 'graphs/differenceDifferentsZc', '-dpng', '-r500');
+print(stabilisation, 'graphs/stabilisationDifferentsZc', '-dpng', '-r500');
