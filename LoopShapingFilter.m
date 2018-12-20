@@ -6,7 +6,7 @@ define_consts()
 % Gain of controller : 
 h_num = 10;
 h_denum = 1;
-cutoffs = [5, 10, 100,];
+cutoffs = [10, 50 ,100];
 
 options = bodeoptions;
 options.FreqUnits = 'Hz'; % or 'rad/second', 'rpm', etc.
@@ -16,14 +16,33 @@ difference = figure('Name','Difference');
 bodePlot = figure('Name','Bode');
 nsqPlot = figure('Name','Nyquist');
 
+a = 0.1;
+wco = 5;
+
+sys = ss(A,B,C,D);
+P = tf(sys);
+
+tflead=tf([1, (wco*sqrt(a))],[1, wco/sqrt(a)]);
+
 for i=1:size(cutoffs,2)
     cutoff = cutoffs(i);
-    h_denum = [1/cutoff, 1];
+%     h_denum = [1/cutoff, 1];
+
+    tflowpass=tf(1,[1/cutoff, 1]);
+
+    Hcontroller = tflead*tflowpass;
+    
+    G0 = getGain(Hcontroller * P, wco);
+
+    Hcontroller = Hcontroller * G0;
+    
+    h_num = cell2mat(Hcontroller.num);
+    h_denum = cell2mat(Hcontroller.den);
 
     opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
     sim('loopShaping', [0,10],opt);
 
-    acc = dx.data(:,2);
+    acc = dx.data(:,1);
 
     figure(acceleration);
     plot(dx.time, acc);hold on;

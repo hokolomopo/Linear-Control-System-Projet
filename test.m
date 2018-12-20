@@ -1,8 +1,8 @@
 close all
 clear all
 
-c = 0.25;
-m = 10;
+c = 0.2;
+m = 7;
 
 A = [0 1; 0 -c/m];
 B = [0 0;1/m 0];
@@ -37,14 +37,10 @@ K = place(A,B,[p1 p2]);
 sys_cl = ss(A-B*K,B,C,D);
 
 [y,t,~] = lsim(sys_cl, u, t, x0);
-
-fig = figure;
-plot(t,y)
-
 % [y,t,~] = lsim(sys,u,t,x0);
 
 
-figure
+fig = figure;
 subplot(3,1,1);
 plot(t, u(1, :));
 title('Force exerted by the actuator (u1)');
@@ -57,45 +53,45 @@ title('Position of Runner (u2)');
 xlabel('Time (sec)')
 ylim([-2 12])
 ylabel('Position (m)')
-% 
-% subplot(3,1,3);
-% plot(t,y)
-% title('Distance between Camera and Runner (Output y)')
-% ylabel('Distance (m)')
-% ylim([-12, 2])
-% xlabel('Time (sec)')
-% 
-% print(fig, 'openLoopRunner', '-deps');
-% 
-% endTime = 80;
-% t = 0:step:endTime;
-% 
-% u = zeros(2, size(t, 2));
-% 
-% for i=100:200
-%     u(1, i) = 10;
-% end
-% 
-% [y,t,~] = lsim(sys,u,t,x0);
-% 
-% fig2 = figure;
-% subplot(3,1,1);
-% plot(t, u(1, :));
-% title('Force exerted by the actuator (u1)');
-% xlabel('Time (sec)')
-% ylim([-2 12])
-% ylabel('Force (N)')
-% 
-% subplot(3,1, 2);
-% plot(t, u(2, :));
-% title('Position of Runner (u2)');
-% xlabel('Time (sec)')
-% ylabel('Position (m)')
-% 
-% subplot(3,1,3);
-% plot(t,y)
-% title('Distance between Camera and Runner (Output y)')
-% ylabel('Distance (m)')
-% xlabel('Time (sec)')
-% 
-% print(fig2, 'openLoopMotor', '-deps');
+
+subplot(3,1,3);
+plot(t,y)
+title('Distance between Camera and Runner (Output y)')
+ylabel('Distance (m)')
+ylim([-12, 2])
+xlabel('Time (sec)')
+
+print(fig, 'openLoopRunner', '-depsc2');
+
+endTime = 80;
+t = 0:step:endTime;
+
+u = zeros(2, size(t, 2));
+
+for i=100:200
+    u(1, i) = 10;
+end
+
+[y,t,~] = lsim(sys,u,t,x0);
+
+fig2 = figure;
+subplot(3,1,1);
+plot(t, u(1, :));
+title('Force exerted by the actuator (u1)');
+xlabel('Time (sec)')
+ylim([-2 12])
+ylabel('Force (N)')
+
+subplot(3,1, 2);
+plot(t, u(2, :));
+title('Position of Runner (u2)');
+xlabel('Time (sec)')
+ylabel('Position (m)')
+
+subplot(3,1,3);
+plot(t,y)
+title('Distance between Camera and Runner (Output y)')
+ylabel('Distance (m)')
+xlabel('Time (sec)')
+
+print(fig2, 'openLoopMotor', '-depsc2');

@@ -19,8 +19,14 @@ Hlead = tf([1 1],[1/(1*ratio) 1]);
 
 Hcontroller = Hcutoff*Hlead*30;
 
-h_num = cell2mat(Hcontroller.num);
-h_denum = cell2mat(Hcontroller.den);
+wco = 7.2;
+G0 = getGain(P, wco);
+
+h_num = 100;
+h_denum = 1;
+
+% h_num = cell2mat(Hcontroller.num);
+% h_denum = cell2mat(Hcontroller.den);
 
 opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
 sim('loopShaping', [0,10],opt);
@@ -32,7 +38,7 @@ bodePlt = figure('Name','Bode Plot');
 nyquistPlt = figure('Name','Nyquist Plot');
 
 
-acc = dx.data(:,2);
+acc = dx.data(:,1);
 
 figure(acceleration);
 plot(dx.time, acc);hold on;

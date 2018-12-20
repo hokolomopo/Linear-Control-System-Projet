@@ -13,18 +13,20 @@ createKL()
 opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
 sim('observer_noise', [0,10],opt);
     
-acc = dx.data(:,2);
+acc = dx.data(:,1);
 
-acceleration = figure;
+force = figure;
 plot(dx.time, acc);hold on;
+grid on;
 xlabel('Time(s)');
-ylabel('Acceleration (m/s^2)');
+ylabel('Force (N)');
 % title('Accelaration of camera');
-print(acceleration, 'graphs/accelerationRunnerAndCameraStateFeedbackNoisy', '-depsc2');
+print(force, 'graphs/forceRunnerAndCameraStateFeedbackNoisy', '-depsc2');
 
 positions = figure;
 plot(x_camera); hold on;
 plot(x_runner);hold on;
+grid on;
 xlabel('Time(s)');
 ylabel('Input (m/s^2)');
 legend('Position of runner', 'Position of camera', 'Location', 'southeast');
@@ -32,6 +34,7 @@ legend('Position of runner', 'Position of camera', 'Location', 'southeast');
 
 difference = figure;
 plot(diff.Time, diff.data);hold on;
+grid on;
 xlabel('Time(s)');
 ylabel('Difference (m)');
 print(difference, 'graphs/differenceRunnerAndCameraStateFeedbackNoisy', '-depsc2');

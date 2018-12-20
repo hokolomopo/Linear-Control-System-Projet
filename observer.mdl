@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.14"
+    ComputedModelVersion    "1.15"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 1936.0, 1176.0]
+      Location		      [-8.0, 0.0, 1936.0, 1176.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Adrien"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Dec 12 16:06:13 2018"
-  RTWModifiedTimeStamp	  466529477
-  ModelVersionFormat	  "1.%<AutoIncrement:14>"
+  LastModifiedDate	  "Wed Dec 19 15:18:43 2018"
+  RTWModifiedTimeStamp	  467133519
+  ModelVersionFormat	  "1.%<AutoIncrement:15>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -967,7 +967,7 @@ Model {
   }
   System {
     Name		    "observer"
-    Location		    [-8, -8, 1928, 1168]
+    Location		    [-8, 0, 1928, 1176]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1352,7 +1352,7 @@ Model {
       Name		      "To Workspace"
       SID		      "71"
       Ports		      [1]
-      Position		      [605, 100, 665, 130]
+      Position		      [385, 20, 445, 50]
       ZOrder		      59
       VariableName	      "dx"
       MaxDataPoints	      "inf"
@@ -1543,18 +1543,8 @@ Model {
       }
       Branch {
 	ZOrder			159
-	Points			[23, 0]
-	Branch {
-	  ZOrder		  232
-	  Points		  [0, -40; 28, 0; 0, -35]
-	  DstBlock		  "To Workspace"
-	  DstPort		  1
-	}
-	Branch {
-	  ZOrder		  231
-	  DstBlock		  "Integrator"
-	  DstPort		  1
-	}
+	DstBlock		"Integrator"
+	DstPort			1
       }
     }
     Line {
@@ -1672,9 +1662,19 @@ Model {
       ZOrder		      230
       SrcBlock		      "Saturation"
       SrcPort		      1
-      Points		      [13, 0; 0, 54; -50, 0; 0, 41]
-      DstBlock		      "B\n\n"
-      DstPort		      1
+      Points		      [13, 0]
+      Branch {
+	ZOrder			280
+	Points			[0, 54; -50, 0; 0, 41]
+	DstBlock		"B\n\n"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			279
+	Points			[0, -60]
+	DstBlock		"To Workspace"
+	DstPort			1
+      }
     }
     Annotation {
       SID		      "34"

@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.18"
+    ComputedModelVersion    "1.19"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 1936.0, 1176.0]
+      Location		      [-8.0, 0.0, 1936.0, 1176.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Adrien"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Dec 12 23:10:54 2018"
-  RTWModifiedTimeStamp	  466537365
-  ModelVersionFormat	  "1.%<AutoIncrement:18>"
+  LastModifiedDate	  "Wed Dec 19 15:19:05 2018"
+  RTWModifiedTimeStamp	  467133544
+  ModelVersionFormat	  "1.%<AutoIncrement:19>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1011,7 +1011,7 @@ Model {
   }
   System {
     Name		    "observer_noise"
-    Location		    [-8, -8, 1928, 1168]
+    Location		    [-8, 0, 1928, 1176]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1609,18 +1609,8 @@ Model {
       }
       Branch {
 	ZOrder			159
-	Points			[24, 0]
-	Branch {
-	  ZOrder		  261
-	  Points		  [0, -40; 169, 0; 0, -75]
-	  DstBlock		  "To Workspace"
-	  DstPort		  1
-	}
-	Branch {
-	  ZOrder		  260
-	  DstBlock		  "Integrator"
-	  DstPort		  1
-	}
+	DstBlock		"Integrator"
+	DstPort			1
       }
     }
     Line {
@@ -1748,9 +1738,19 @@ Model {
       }
       Branch {
 	ZOrder			305
-	Points			[0, 17; -144, 0]
-	DstBlock		"B\n\n"
-	DstPort			1
+	Points			[0, 17]
+	Branch {
+	  ZOrder		  315
+	  Points		  [-144, 0]
+	  DstBlock		  "B\n\n"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  314
+	  Points		  [120, 0; 0, 108]
+	  DstBlock		  "To Workspace"
+	  DstPort		  1
+	}
       }
     }
     Line {

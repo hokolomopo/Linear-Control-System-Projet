@@ -1,7 +1,8 @@
 clear all
-close all
 
-c = 0.;
+d = 0;
+n = 0;
+c = 0.2;
 m = 7;
 
 defaultGain = 20;
@@ -13,7 +14,7 @@ D = 0;
 sys = ss(A,B,C,D);
 x0 = [0 0];
 
-step = 0.01;
+step = 0.001;
 endTime = 2;
 t = 0:step:endTime;
 
@@ -50,19 +51,21 @@ L = zeros(2, 1);
 L(1) = 2* zeta_o * omega_o - c / m;
 L(2) = omega_o^2 -2 * zeta_o * omega_o * c /m + c^2/m^2;
 
-t = 0:step:10;
+t = 0:step:10-step;
 t = t';
 
 
 coureur = generateRunnerPositionsSimple(step);
 coureur = coureur';
 
+
 % x_usain = [0 1.89 2.88 3.78 4.64 5.47 6.29 7.1 7.92 8.75 9.58];
 % y_usain = [0 10 20 30 40 50 60 70 80 90 100];
-% f = polyfit(x_usain,y_usain ,3);
+% f = polyfit(x_usain,y_usain ,5);
 % coureur =polyval(f, t);
-% coureur = coureur(1:1000);
 
+
+coureur = coureur(1:size(t, 1));
 ref.time = [];
 ref.signals.values = [coureur];
 ref.signals.dimensions =1;

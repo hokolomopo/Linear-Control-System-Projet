@@ -13,30 +13,13 @@ createKL()
 opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
 sim('observer', [0,10],opt);
 
-acceleration = figure('Name','Acceleration');
-xlabel('time(s)');
-ylabel('Acceleration (m/s^2)');
-title('Accelaration of camera');
-
+force = figure('Name','force');
 difference = figure('Name','Difference');
-xlabel('time(s)');
-ylabel('Difference (m)');
-title('Difference of positions');
-
 positions = figure('Name','Positions');
-xlabel('time(s)');
-ylabel('Position (m)');
-title('Positions');
-
-
-% omega_c = 5;
-% zeta_o = zeta_c;
-% omega_o = 10 * omega_c;
-
     
-acc = dx.data(:,2);
+acc = dx.data(:,1);
 
-figure(acceleration);
+figure(force);
 plot(dx.time, acc);hold on;
 
 figure(positions);
@@ -47,28 +30,31 @@ figure(difference);
 plot(diff.Time, diff.data);hold on;
 
 
-figure(acceleration);
+figure(force);
+grid on;
 xlabel('Time(s)');
-ylabel('Acceleration (m/s^2)');
+ylabel('Force (N)');
 % title('Accelaration of camera');
 
 figure(positions);
+grid on;
 xlabel('Time(s)');
 ylabel('Position (m)');
 % title('Positions');
 legend('Position of runner', 'Position of camera', 'Location', 'southeast');
 
 figure(difference);
+grid on;
 xlabel('Time(s)');
 ylabel('Difference (m)');
 % title('Difference of positions');
 
 print(positions, 'graphs/positionsRunnerAndCameraStateFeedback', '-depsc2');
-print(acceleration, 'graphs/accelerationRunnerAndCameraStateFeedback', '-depsc2');
+print(force, 'graphs/forceRunnerAndCameraStateFeedback', '-depsc2');
 print(difference, 'graphs/differencenRunnerAndCameraStateFeedback', '-depsc2');
 
-figure(acceleration);
-title('Accelaration of camera');
+figure(force);
+title('Force exerted on camera');
 
 figure(difference);
 title('Difference of positions');
@@ -77,5 +63,5 @@ figure(positions);
 title('Positon for camera and runner');
 
 print(positions, 'graphs/stateFeedbackpositions', '-dpng', '-r500');
-print(acceleration, 'graphs/stateFeedbackacceleration', '-dpng', '-r500');
+print(force, 'graphs/stateFeedbackforce', '-dpng', '-r500');
 print(difference, 'graphs/stateFeedbackdifferencen', '-dpng', '-r500');

@@ -9,20 +9,9 @@ zeta_o = zeta_c;
 
 opt = simset('solver','ode45','SrcWorkspace','Current','AbsTol','1e-3');
 
-acceleration = figure('Name','Acceleration');
-xlabel('time(s)');
-ylabel('Acceleration (m/s^2)');
-title('Accelaration of camera');
-
+force = figure('Name','Force');
 difference = figure('Name','Difference');
-xlabel('time(s)');
-ylabel('Difference (m)');
-title('Difference of positions');
-
 stabilisation = figure('Name','stabilisation');
-xlabel('time(s)');
-ylabel('Position (m)');
-title('Position of camera');
 
 for i = 1 : length(wc)
     omega_c = wc(i);
@@ -30,9 +19,9 @@ for i = 1 : length(wc)
     
     createKL()
     sim('observer', [0,10],opt);
-    acc = dx.data(:,2);
+    acc = dx.data(:,1);
     
-    figure(acceleration);
+    figure(force);
     plot(dx.time, acc);hold on;
 
     figure(difference);
@@ -45,30 +34,33 @@ for i = 1 : length(wc)
 end
 
 
-figure(acceleration);
+figure(force);
+grid on;
 xlabel('Time (s)')
-ylabel('Acceleration (m/s^2');
+ylabel('Force (N)');
 % title('Accelaration of camera');
 legend(sprintf('\\omega_c = %.2f', wc(1)), sprintf('\\omega_c = %.2f', wc(2)), sprintf('\\omega_c = %.2f', wc(3)) ,'Location', 'southeast');
 
 figure(difference);
-xlabel('Time (s)')
+grid on;
+xlabel('Time (s)');
 ylabel('Difference (m)');
 % title('Difference of positions');
 legend(sprintf('\\omega_c = %.2f', wc(1)), sprintf('\\omega_c = %.2f', wc(2)), sprintf('\\omega_c = %.2f', wc(3)) ,'Location', 'southeast');
 
 figure(stabilisation);
+grid on;
 ylabel('Position (m)');
 xlabel('Time (s)')
 % title('Stability?');
 legend(sprintf('\\omega_c = %.2f', wc(1)), sprintf('\\omega_c = %.2f', wc(2)), sprintf('\\omega_c = %.2f', wc(3)) ,'Location', 'southeast');
 
-print(acceleration, 'graphs/accelerationDifferentsWc', '-depsc2');
+print(force, 'graphs/forceDifferentsWc', '-depsc2');
 print(difference, 'graphs/differenceDifferentsWc', '-depsc2');
 print(stabilisation, 'graphs/stabilisationDifferentsWc', '-depsc2');
 
-figure(acceleration);
-title('Accelaration of camera');
+figure(force);
+title('Force exerted on camera');
 
 figure(difference);
 title('Difference of positions');
@@ -76,6 +68,6 @@ title('Difference of positions');
 figure(stabilisation);
 title('Stability');
 
-print(acceleration, 'graphs/accelerationDifferentsWc', '-dpng', '-r500');
+print(force, 'graphs/forceDifferentsWc', '-dpng', '-r500');
 print(difference, 'graphs/differenceDifferentsWc', '-dpng', '-r500');
 print(stabilisation, 'graphs/stabilisationDifferentsWc', '-dpng', '-r500');
